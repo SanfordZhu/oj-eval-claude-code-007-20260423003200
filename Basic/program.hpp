@@ -11,8 +11,12 @@
 #include <string>
 #include <vector>
 #include <set>
+#include <map>
 #include <unordered_map>
+#include <iostream>
 #include "statement.hpp"
+#include "evalstate.hpp"
+#include "Utils/error.hpp"
 
 
 class Statement;
@@ -142,11 +146,22 @@ public:
 
     //more func to add
     //todo
+    void listProgram(std::ostream& os) const;
+    void runProgram(EvalState& state);
+    bool hasLine(int lineNumber) const;
+    int getCurrentLine() const;
+    void setCurrentLine(int lineNumber);
+    void resetCurrentLine();
 
 private:
 
     // Fill this in with whatever types and instance variables you need
     //todo
+    std::map<int, std::string> sourceLines;
+    std::map<int, Statement*> parsedStatements;
+    std::set<int> lineNumbers;
+    int currentLine;
+    bool running;
 };
 
 #endif

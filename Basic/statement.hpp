@@ -73,6 +73,65 @@ public:
 
 };
 
+// Concrete statement classes
+class RemStatement : public Statement {
+public:
+    RemStatement() {}
+    void execute(EvalState &state, Program &program) override;
+};
+
+class LetStatement : public Statement {
+private:
+    std::string var;
+    Expression* exp;
+public:
+    LetStatement(const std::string& varName, Expression* expr);
+    ~LetStatement();
+    void execute(EvalState &state, Program &program) override;
+};
+
+class PrintStatement : public Statement {
+private:
+    Expression* exp;
+public:
+    PrintStatement(Expression* expr);
+    ~PrintStatement();
+    void execute(EvalState &state, Program &program) override;
+};
+
+class InputStatement : public Statement {
+private:
+    std::string var;
+public:
+    InputStatement(const std::string& varName);
+    void execute(EvalState &state, Program &program) override;
+};
+
+class EndStatement : public Statement {
+public:
+    EndStatement() {}
+    void execute(EvalState &state, Program &program) override;
+};
+
+class GotoStatement : public Statement {
+private:
+    int lineNumber;
+public:
+    GotoStatement(int lineNum);
+    void execute(EvalState &state, Program &program) override;
+};
+
+class IfStatement : public Statement {
+private:
+    Expression* exp1;
+    Expression* exp2;
+    std::string op;
+    int lineNumber;
+public:
+    IfStatement(Expression* expr1, Expression* expr2, const std::string& operation, int lineNum);
+    ~IfStatement();
+    void execute(EvalState &state, Program &program) override;
+};
 
 /*
  * The remainder of this file must consists of subclass

@@ -1,0 +1,12 @@
+CMakeFiles/
+CMakeCache.txt
+testcode
+test_ans
+test_out
+*.o
+code
+build/
+*.swp
+*.swo
+*~
+.DS_Store
