@@ -53,6 +53,8 @@ InputStatement::InputStatement(const std::string& varName) : var(varName) {}
 void InputStatement::execute(EvalState &state, Program &program) {
     std::string input;
     while (true) {
+        std::cout << "? ";
+        std::cout.flush();
         std::getline(std::cin, input);
         if (input.empty()) continue;
 
